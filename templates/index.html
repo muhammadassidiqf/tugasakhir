@@ -169,6 +169,45 @@
         </form>  
       </div>
     </div>
+    <div class="section section-buttons" id="three">
+      <div class="container">
+        <div class="title">
+          <h2>Proses Klasifikasi</h2>
+        </div>
+          <div class="row">      
+              <div class="col-md-6">
+                <label for="text" class="col-sm-12 col-form-label">Matriks Citra</label>
+                <div class="col-sm-12">
+                  <textarea class="form-control text-center" id="matriks_citra"
+                  name="matriks_citra" rows="10" readonly></textarea>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="text" class="col-sm-12 col-form-label">Matriks Pre-processing</label>
+                <div class="col-sm-12">
+                  <textarea class="form-control text-center" id="matriks_preproc"
+                  name="matriks_preproc" rows="10" readonly></textarea>
+                </div>
+              </div>
+          </div>
+          <div class="row mt-4">      
+              <div class="col-md-6">
+                <label for="text" class="col-sm-12 col-form-label">Matriks Convolution 3x3</label>
+                <div class="col-sm-12">
+                  <textarea class="form-control text-center" id="matriks_conv"
+                  name="matriks_conv" rows="10" readonly></textarea>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="text" class="col-sm-12 col-form-label">Matriks Depthwise Separable Convolution 1</label>
+                <div class="col-sm-12">
+                  <textarea class="form-control text-center" id="matriks_dept1"
+                  name="matriks_dept1" rows="10" readonly></textarea>
+                </div>
+              </div>
+          </div>
+      </div>
+    </div>
     <footer class="footer footer-black  footer-white ">
       <div class="container">
         <div class="row">
@@ -226,6 +265,10 @@
           }).done(function(d,textStatus,jqXHR){
             $('#res').empty();
             $('#acc').empty();
+            $('#matriks_preproc').empty();
+            $('#matriks_citra').empty();
+            $('#matriks_conv').empty();
+            $('#matriks_dept1').empty();
             alert('success!')
             console.log(d);
             console.log(textStatus);
@@ -233,6 +276,10 @@
 
             $("#res").append(d.res);
             $("#acc").append(d.acc);
+            $("#matriks_citra").val(d.cit);
+            $("#matriks_preproc").val(d.proc);
+            $("#matriks_conv").val(d.conv);
+            $("#matriks_dept1").val(d.dept1);
           }).fail(function(data){
             alert('error!');
           });

@@ -37,17 +37,38 @@ def prediction(filepath):
                 optimizer='adam',
                 metrics=['accuracy'])
 
-    # img = cv2.imread(filepath)
-    # img = cv2.resize(img,(224,224))
-    # img = np.reshape(img,[1,224,224,3])
+    inp = image.load_img(filepath)
+    img_array = image.img_to_array(inp)
     img = prepare_image(filepath)
     classes = model.predict(img)
+
+    c1 = (model.get_layer('conv1'))(img)
+    conv1 = tf.Variable(c1)
+
+    bn = (model.get_layer('conv1_bn'))(c1)
+    bnorm = tf.Variable(bn)
+    rl = (model.get_layer('conv1_relu'))(bn)
+    relu = tf.Variable(rl)
+    c_dw_1 = (model.get_layer('conv_dw_1'))(rl)
+    conv1_dw = tf.Variable(c_dw_1)
+
+    c_dw_1bn = (model.get_layer('conv_dw_1_bn'))(c_dw_1)
+    conv1_dw_bn = tf.Variable(c_dw_1bn)
+    c_dw_1rl = (model.get_layer('conv_dw_1_relu'))(c_dw_1bn)
+    conv1_dw_rl = tf.Variable(c_dw_1rl)
+    c_pw_1 = (mobile.get_layer('conv_pw_1'))(c_dw_1rl)
+    conv1_pw = tf.Variable(c_pw_1)
+    c_pw_1bn = (mobile.get_layer('conv_pw_1_bn'))(c_pw_1)
+    conv1_pw_bn = tf.Variable(c_pw_1bn)
+    c_pw_1rl = (mobile.get_layer('conv_pw_1_relu'))(c_pw_1bn)
+    conv1_pw_rl = tf.Variable(c_pw_1rl)
+
     res = []   
     if classes[0][0] > classes[0][1]:
-        res.append(("Bukan Penyakit Blas",classes[0][0]))
+        res.append(("Bukan Penyakit Blas",classes[0][0],img_array,img,relu,conv1_pw_rl))
         # print("Daun Padi Sehat")
     elif classes[0][1] > classes[0][0]:
-        res.append(("Penyakit Blas Daun Padi",classes[0][1]))
+        res.append(("Penyakit Blas Daun Padi",classes[0][1],img_array,img,relu,conv1_pw_rl))
         # print("Penyakit Blas Daun Padi")
     return res
 
@@ -76,7 +97,7 @@ def upload_file():
                 # return prediction(file_path)
                 pred = prediction(file_path)
                 # return jsonify('success')
-                return jsonify(res=str(pred[0][0]), acc=str(pred[0][1]))
+                return jsonify(res=str(pred[0][0]), acc=str(pred[0][1]), cit=str(pred[0][2]), proc=str(pred[0][3]), conv=str(pred[0][4]), dept1=str(pred[0][5]))
         else:
             flash('No file part')
             return redirect(request.url)
