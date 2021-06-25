@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="{{ url_for('static',filename='img/logoitenas2.png')}}">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Penelitian Tugas Akhir
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css')}}" type="text/css">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/paper-kit.css')}}" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css" />
+
+  <!--   Core JS Files   -->
+  <script src="{{ url_for('static',filename='js/core/jquery.min.js')}}" type="text/javascript"></script>
+  <script src="{{ url_for('static',filename='js/core/popper.min.js')}}" type="text/javascript"></script>
+  <script src="{{ url_for('static',filename='js/core/bootstrap.min.js')}}" type="text/javascript"></script>
+  <!-- Control Center for Paper Kit: parallax effects, scripts for the example pages etc -->
+  <script src="{{ url_for('static',filename='js/paper-kit.js')}}" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
+</head>
+<style>
+  #header {
+    background-image: url("{{ url_for('static', filename='img/sawah2.jpg') }}");
+  }
+  .moving-clouds {
+    background-image: url("{{ url_for('static', filename='img/clouds.png') }}");
+  }
+</style>
+<body class="index-page sidebar-collapse">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-transparent " color-on-scroll="300">
+    <div class="container">
+      <div class="navbar-translate">
+        <a class="navbar-brand" href="https://itenas.ac.id" rel="tooltip" title="IF Itenas" data-placement="bottom" target="_blank"> <img src="{{ url_for('static',filename='img/modul-lab-informatikax4-1.png')}}" alt="" style="width: 30px;">
+          Informatika Itenas
+        </a>
+        <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-bar bar1"></span>
+          <span class="navbar-toggler-bar bar2"></span>
+          <span class="navbar-toggler-bar bar3"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse justify-content-end" id="navigation">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" rel="tooltip" title="Halaman Header" data-placement="bottom" href="#header">
+              <p>Home</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" rel="tooltip" title="Halaman Blas" data-placement="bottom" href="#first">            
+              <p>Blas Daun Padi</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" rel="tooltip" title="Halaman Klasifikasi" data-placement="bottom" href="#second">
+              <p>Klasifikasi</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="https://www.linkedin.com/in/muhammad-assidiq-fattah-289911129/" target="_blank" class="btn btn-danger btn-round">152017015-Muhammad Assidiq Fattah</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+  <div class="page-header section-dark" id="header">
+    <div class="filter"></div>
+    <div class="content-center">
+      <div class="container">
+        <div class="title-brand">
+          <h3 class="presentation-title">Identifikasi Penyakit Blas Daun Padi</h3>
+          <div class="fog-low">
+            <img src="{{ url_for('static',filename='img/fog-low.png')}}" alt="">
+          </div>
+          <div class="fog-low right">
+            <img src="{{ url_for('static',filename='img/fog-low.png')}}" alt="">
+          </div>
+        </div>
+        <h2 class="presentation-subtitle text-center">Menggunakan MobileNet</h2>
+      </div>
+    </div>
+    <div class="moving-clouds"></div>
+    <h6 class="category category-absolute">All right reserve &copy; Muhammad Assidiq Fattah
+    </h6>
+  </div>
+  <div class="main">
+    <div class="section section-buttons" id="first">
+      <div class="container">
+        <div class="title">
+          <h2>Blas Daun Padi</h2>
+        </div>
+        <div class="row">
+          <div class="col-md-4 ml-auto mr-auto">
+            <div class="card page-carousel">
+              <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                  <div class="carousel-item active">
+                    <img class="d-block img-fluid" src="{{ url_for('static',filename='img/IMG_5385.png')}}" alt="First slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <p style="color: black;">Leaf Blast</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block img-fluid" src="{{ url_for('static',filename='img/IMG_3119.jpg')}}" alt="Second slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <p style="color: black;">Healthy</p>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <img class="d-block img-fluid" src="{{ url_for('static',filename='img/IMG_5392.JPG')}}" alt="Third slide">
+                    <div class="carousel-caption d-none d-md-block">
+                      <p>Here it is</p>
+                    </div>
+                  </div>
+                </div>
+                <a class="left carousel-control carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                  <span class="fa fa-angle-left"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                  <span class="fa fa-angle-right"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section section-buttons" id="second">
+      <div class="container">
+        <div class="title">
+          <h2>Klasifikasi</h2>
+        </div>
+        <form id="uploadform" method="POST" enctype="multipart/form-data">
+          <div class="row">      
+              <div class="col-md-6">
+                <label for="gambar" class="col-sm-12 col-form-label">Masukan Gambar</label>
+                <div class="col-sm-12">
+                  <div class="custom-file">
+                      <input type="file" name="file" id="file" class="dropify" data-max-file-size="5M" data-allowed-file-extensions="jpeg png jpg" accept="image/*">
+                  </div>
+                  <a id="btn-upload" class="btn btn-primary btn-lg float-right mt-2">Upload</a>
+                </div>
+              </div>
+              <div class="col-md-6 my-auto">
+                <div class="col-sm-12 text-center" id="res" style="font-size: 20px;font-weight: bold;">
+                  
+                </div>
+                <div class="col-sm-12 text-center" id="acc" style="font-size: 15px;font-weight: bold;">
+                 
+                </div>
+              </div>
+          </div>
+        </form>  
+      </div>
+    </div>
+    <footer class="footer footer-black  footer-white ">
+      <div class="container">
+        <div class="row">
+          <nav class="footer-nav">
+            <ul>
+              <li>
+                <a href="https://www.instagram.com/massidiqfattah/" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
+              </li>
+              <li>
+                <a href="https://twitter.com/massidiqfattahh" target="_blank"><i class="fa fa-twitter fa-2x"></i></a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/muhammad-assidiq-fattah-289911129/" target="_blank"><i class="fa fa-linkedin fa-2x"></i></a>
+              </li>
+            </ul>
+          </nav>
+          <div class="credits ml-auto">
+            <span class="copyright">
+              ©
+              <script>
+                document.write(new Date().getFullYear())
+              </script>, made with <i class="fa fa-heart heart"></i> by Muhammad Assidiq Fattah
+            </span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      $(document).ready(function() {
+        $('.dropify').dropify({
+            messages: {
+                'default': '',
+                'replace': 'Drag and drop or click to replace',
+                'remove': 'Remove',
+                'error': 'Ooops, something wrong happended.'
+            }
+        });
+        $('#btn-upload').click(function(e) {
+          e.preventDefault();
+          var form_data = new FormData($('#uploadform')[0]);
+          // console.log(form_data)
+          $.ajax({
+            url: '/upload',
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            data: form_data,
+            type: 'POST',
+            async: true,
+            // success: function (d) { 
+            //   alert('Success!');
+            //   console.log(d);
+            // },
+          }).done(function(d,textStatus,jqXHR){
+            $('#res').empty();
+            $('#acc').empty();
+            alert('success!')
+            console.log(d);
+            console.log(textStatus);
+            console.log(jqXHR);
+
+            $("#res").append(d.res);
+            $("#acc").append(d.acc);
+          }).fail(function(data){
+            alert('error!');
+          });
+          
+        });
+      });
+    </script>
+</body>
+
+</html>
