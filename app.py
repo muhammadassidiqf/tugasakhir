@@ -261,13 +261,14 @@ def prediction(filepath):
 
     #proses prediksi
     classes = model.predict(img)
-
     res = []   
     if classes[0][0] > classes[0][1]:
-        res.append(("Bukan Penyakit Blas",classes[0][0],img_array,img,relu,conv1_pw_rl,conv2_pw_rl,conv3_pw_rl,conv4_pw_rl,conv5_pw_rl,conv6_pw_rl,conv7_pw_rl,conv8_pw_rl,conv9_pw_rl,conv10_pw_rl,conv11_pw_rl,conv12_pw_rl,conv13_pw_rl,gap,dropout,dense))
+        result = str(classes[0][0] * 100)+'%'
+        res.append(("Bukan Penyakit Blas",result,img_array,img,relu,conv1_pw_rl,conv2_pw_rl,conv3_pw_rl,conv4_pw_rl,conv5_pw_rl,conv6_pw_rl,conv7_pw_rl,conv8_pw_rl,conv9_pw_rl,conv10_pw_rl,conv11_pw_rl,conv12_pw_rl,conv13_pw_rl,gap,dropout,dense))
         # print("Daun Padi Sehat")
     elif classes[0][1] > classes[0][0]:
-        res.append(("Penyakit Blas Daun Padi",classes[0][1],img_array,img,relu,conv1_pw_rl,conv2_pw_rl,conv3_pw_rl,conv4_pw_rl,conv5_pw_rl,conv6_pw_rl,conv7_pw_rl,conv8_pw_rl,conv9_pw_rl,conv10_pw_rl,conv11_pw_rl,conv12_pw_rl,conv13_pw_rl,gap,dropout,dense))
+        result = str(classes[0][1] * 100)+'%'
+        res.append(("Penyakit Blas Daun Padi",result,img_array,img,relu,conv1_pw_rl,conv2_pw_rl,conv3_pw_rl,conv4_pw_rl,conv5_pw_rl,conv6_pw_rl,conv7_pw_rl,conv8_pw_rl,conv9_pw_rl,conv10_pw_rl,conv11_pw_rl,conv12_pw_rl,conv13_pw_rl,gap,dropout,dense))
         # print("Penyakit Blas Daun Padi")
     return res
 
