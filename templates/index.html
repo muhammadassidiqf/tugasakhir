@@ -361,15 +361,29 @@
         </div>
         <div class="row mt-4">
           <div class="col-md-6">
-            <label for="text" class="col-sm-12 col-form-label">Matriks Dropout</label>
+            <label for="text" class="col-sm-12 col-form-label">Matriks Dropout Average Pooling</label>
             <div class="col-sm-12">
               <textarea class="form-control text-center" id="dropout" name="dropout" rows="10" readonly></textarea>
             </div>
           </div>
           <div class="col-md-6">
-            <label for="text" class="col-sm-12 col-form-label">Matriks Softmax Activation</label>
+            <label for="text" class="col-sm-12 col-form-label">Matriks Dropout Max Pooling</label>
+            <div class="col-sm-12">
+              <textarea class="form-control text-center" id="dropo" name="dropo" rows="10" readonly></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-6">
+            <label for="text" class="col-sm-12 col-form-label">Matriks Softmax Activation Average Pooling</label>
             <div class="col-sm-12">
               <textarea class="form-control text-center" id="dense" name="dense" rows="10" readonly></textarea>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="text" class="col-sm-12 col-form-label">Matriks Softmax Activation Max Pooling</label>
+            <div class="col-sm-12">
+              <textarea class="form-control text-center" id="dens" name="dens" rows="10" readonly></textarea>
             </div>
           </div>
         </div>
@@ -455,6 +469,8 @@
             $('#gmp').empty();
             $('#dropout').empty();
             $('#dense').empty();
+            $('#dropo').empty();
+            $('#dens').empty();
             $('#tim').empty();
             alert('Gambar berhasil di upload!!!\n Waktu Proses: ' + Math.round(d.timing) + ' Detik')
             console.log(d);
@@ -485,6 +501,8 @@
             $('#gmp').val(d.gmp);
             $('#dropout').val(d.drop);
             $('#dense').val(d.dense);
+            $('#dropo').val(d.dro);
+            $('#dens').val(d.den);
           }).fail(function (data) {
             alert('Gambar gagal di upload!!!');
           });
