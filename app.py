@@ -36,6 +36,10 @@ def prediction(filepath):
                 optimizer='adam',
                 metrics=['accuracy'])
 
+    model_gmp = load_model('LeafBlast_37.hdf5')
+    model_gmp.compile(loss='categorical_crossentropy',
+                optimizer='adam',
+                metrics=['accuracy'])
     #matriks citra asli
     inp = image.load_img(filepath)
     img_array = image.img_to_array(inp)
@@ -51,6 +55,17 @@ def prediction(filepath):
     timing = time.time() - start
 
     print("processing time: ", timing)
+
+    mb = (model_gmp.get_layer('mobilenet_1.00_224'))(img)
+    m = tf.Variable(mb)
+    mp = (model_gmp.get_layer('global_max_pooling2d'))(mb)
+    gmp = tf.Variable(mp)
+     #matriks dropout 0.4
+    do = (model_gmp.get_layer('dropout'))(mp)
+    dropo = tf.Variable(do)
+    #matriks fully connected layer dan aktivasi softmax
+    de = (model_gmp.get_layer('dense'))(do)
+    dens = tf.Variable(de)
 
     #matriks konvolusi standar 3x3
     c1 = (model.get_layer('conv1'))(img)
@@ -270,12 +285,12 @@ def prediction(filepath):
 
     res = []   
     if classes[0][0] > classes[0][1]:
-        result = str(classes[0][0] * 100)+'%'
-        res.append(("Bukan Penyakit Blas",result,img_array,img,relu,conv1_pw_rl,conv2_pw_rl,conv3_pw_rl,conv4_pw_rl,conv5_pw_rl,conv6_pw_rl,conv7_pw_rl,conv8_pw_rl,conv9_pw_rl,conv10_pw_rl,conv11_pw_rl,conv12_pw_rl,conv13_pw_rl,gap,dropout,dense,timing))
+        result = classes[0][0] * 100
+        res.append(("Bukan Penyakit Blas",result,img_array,img,relu,conv1_pw_rl,conv2_pw_rl,conv3_pw_rl,conv4_pw_rl,conv5_pw_rl,conv6_pw_rl,conv7_pw_rl,conv8_pw_rl,conv9_pw_rl,conv10_pw_rl,conv11_pw_rl,conv12_pw_rl,conv13_pw_rl,gap,dropout,dense,timing,gmp))
         # print("Daun Padi Sehat")
     elif classes[0][1] > classes[0][0]:
-        result = str(classes[0][1] * 100)+'%'
-        res.append(("Penyakit Blas Daun Padi",result,img_array,img,relu,conv1_pw_rl,conv2_pw_rl,conv3_pw_rl,conv4_pw_rl,conv5_pw_rl,conv6_pw_rl,conv7_pw_rl,conv8_pw_rl,conv9_pw_rl,conv10_pw_rl,conv11_pw_rl,conv12_pw_rl,conv13_pw_rl,gap,dropout,dense,timing))
+        result = classes[0][1] * 100
+        res.append(("Penyakit Blas Daun Padi",result,img_array,img,relu,conv1_pw_rl,conv2_pw_rl,conv3_pw_rl,conv4_pw_rl,conv5_pw_rl,conv6_pw_rl,conv7_pw_rl,conv8_pw_rl,conv9_pw_rl,conv10_pw_rl,conv11_pw_rl,conv12_pw_rl,conv13_pw_rl,gap,dropout,dense,timing,gmp))
         # print("Penyakit Blas Daun Padi")
     return res
 
@@ -286,6 +301,10 @@ def index():
 @app.route('/upload', methods=['POST', 'GET'])
 def upload_file():
     if request.method == 'POST':
+        # if request.form['model'] == 'GAP':
+        #     print('gap')
+        # elif request.form['model'] == 'GMP':
+        #     print('gmp')
         if 'file' in request.files:
             f = request.files['file']
             if f.filename == '':
@@ -298,9 +317,9 @@ def upload_file():
                     basepath, 'static/uploads', secure_filename(f.filename))
                 f.save(file_path)
                 pred = prediction(file_path)
-                return jsonify(res=str(pred[0][0]), acc=str(pred[0][1]), cit=str(pred[0][2]), proc=str(pred[0][3]), conv=str(pred[0][4]), dept1=str(pred[0][5]), dept2=str(pred[0][6]), dept3=str(pred[0][7]), dept4=str(pred[0][8]), dept5=str(pred[0][9]), dept6=str(pred[0][10]), dept7=str(pred[0][11]), dept8=str(pred[0][12]), dept9=str(pred[0][13]), dept10=str(pred[0][14]), dept11=str(pred[0][15]), dept12=str(pred[0][16]), dept13=str(pred[0][17]), gap=str(pred[0][18]), drop=str(pred[0][19]), dense=str(pred[0][20]), timing=pred[0][21])
+                return jsonify(res=str(pred[0][0]), acc=str(pred[0][1]), cit=str(pred[0][2]), proc=str(pred[0][3]), conv=str(pred[0][4]), dept1=str(pred[0][5]), dept2=str(pred[0][6]), dept3=str(pred[0][7]), dept4=str(pred[0][8]), dept5=str(pred[0][9]), dept6=str(pred[0][10]), dept7=str(pred[0][11]), dept8=str(pred[0][12]), dept9=str(pred[0][13]), dept10=str(pred[0][14]), dept11=str(pred[0][15]), dept12=str(pred[0][16]), dept13=str(pred[0][17]), gap=str(pred[0][18]), drop=str(pred[0][19]), dense=str(pred[0][20]), timing=pred[0][21], gmp=str(pred[0][22]))
         else:
-            flash('No file part')
+            flash('No selected file')
             return redirect(request.url)
 
 
